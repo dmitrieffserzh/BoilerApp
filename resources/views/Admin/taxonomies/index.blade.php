@@ -14,8 +14,8 @@
 
                 <h4 class="my-3">Категории постов
 
-                    <a class="btn btn-primary btn-sm float-right" href="{{-- route('admin.categories.edit',$category->id) --}}">
-                        <i class="fas fa-pencil-alt"></i>Создать категорию
+                    <a class="btn btn-primary btn-sm float-right" href="{{ route('posts.category.create') }}">
+                        Создать категорию
                     </a>
                 </h4>
                 <div class="row">
