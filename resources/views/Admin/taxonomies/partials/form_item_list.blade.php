@@ -1,12 +1,11 @@
 @foreach ($taxonomies as $taxonomy)
 
     <option value="{{$taxonomy->id ?? ""}}"
-
             @isset($taxonomy_id)
 
-            @if ($taxonomy_id == $taxonomy->id)
-            selected="true"
-            @endif
+                @if ($taxonomy_id == $taxonomy->id)
+                selected="true"
+                @endif
 
             @endisset
 

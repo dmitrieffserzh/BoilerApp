@@ -32,4 +32,6 @@ Route::group([
     Route::get('/posts/categories',             [ 'as' => 'posts.category',                'uses' => 'PostController@taxonomies'        ]);
     Route::get('/posts/categories/create',      [ 'as' => 'posts.category.create',         'uses' => 'PostController@taxonomiesCreate'  ]);
     Route::post('/posts/categories/store',      [ 'as' => 'posts.category.store',          'uses' => 'PostController@taxonomiesStore'   ]);
+    Route::get('/posts/categories/{id}/edit',   [ 'as' => 'posts.category.edit',           'uses' => 'PostController@taxonomiesEdit'    ]);
+    Route::patch('/posts/categories/{id}/update', [ 'as' => 'posts.category.update',         'uses' => 'PostController@taxonomiesUpdate'  ]);
 });

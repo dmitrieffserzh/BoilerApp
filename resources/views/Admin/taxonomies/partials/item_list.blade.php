@@ -19,7 +19,7 @@
         </td>
         <td class="text-muted">
             <div class="btn-group float-right" role="group">
-            <a class="btn btn-primary btn-sm" href="{{-- route('admin.categories.edit',$category->id) --}}">
+            <a class="btn btn-primary btn-sm" href="{{ route('posts.category.edit', $taxonomy->id) }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                      class="admin-feather feather-edit">

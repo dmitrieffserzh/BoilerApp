@@ -64,7 +64,7 @@ class PostController extends Controller {
 
 
     public function taxonomiesCreate() {
-        return view( 'admin.taxonomies.create', [
+        return view( 'Admin.taxonomies.create', [
             'taxonomy'   => null,
             'taxonomies' => Taxonomy::where('content_type', $this->content_type)->with('children')->where('parent_id', '0')->get(),
             'delimiter'  => '',
@@ -91,10 +91,22 @@ class PostController extends Controller {
             ->with( 'success', 'Категория успешно добавлена!' );
     }
 
+    public function taxonomiesEdit( $id ) {
+        return view( 'Admin.taxonomies.edit', [
+            'taxonomy'   => Taxonomy::find( $id ),
+            'taxonomies' => Taxonomy::where('content_type', $this->content_type)->with( 'children' )->where( 'parent_id', '0' )->get(),
+            'delimiter'  => '',
+            'content_type'  => $this->content_type
+        ] );
+    }
 
 
+    public function taxonomiesUpdate( Request $request, $id ) {
 
-
+        Taxonomy::find( $id )->update( $request->all() );
+        return redirect()->route( 'posts.category' )
+            ->with( 'success', 'Категория успешно обновлена!' );
+    }
 
 
 
@@ -121,15 +133,7 @@ class PostController extends Controller {
             'delimiter'  => '',
         ] );
     }
-    public function update( Request $request, $id ) {
-//		request()->validate( [
-//			'title' => 'required',
-//			'slug'  => 'required|unique:categories,slug',
-//		] );
-        Taxonomy::find( $id )->update( $request->all() );
-        return redirect()->route( 'admin.categories.index' )
-            ->with( 'success', 'Категория успешно обновлена!' );
-    }
+
     public function destroy( $id ) {
         Taxonomy::find( $id )->delete();
         return redirect()->route( 'admin.categories.index' )
