@@ -62,4 +62,78 @@ class PostController extends Controller {
 
     }
 
+
+    public function taxonomiesCreate() {
+        return view( 'admin.taxonomies.create', [
+            'taxonomy'   => null,
+            'taxonomies' => Taxonomy::where('content_type', $this->content_type)->with('children')->where('parent_id', '0')->get(),
+            'delimiter'  => '',
+            'content_type'  => $this->content_type
+        ] );
+    }
+
+    public function taxonomiesStore( Request $request ) {
+        //dd($request->all());
+
+        $taxonomy = new Taxonomy();
+
+        $taxonomy->title        = $request->title;
+        $taxonomy->slug         = $request->slug;
+        $taxonomy->parent_id    = $request->parent_id;
+        $taxonomy->_lft         = 0;
+        $taxonomy->_rgt         = 0;
+        $taxonomy->content_type = $this->content_type;
+
+        $taxonomy->save();
+
+
+        return redirect()->route( 'posts.category' )
+            ->with( 'success', 'Категория успешно добавлена!' );
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ////////////
+
+    public function show( $id ) {
+        $category = Taxonomy::findOrFail( $id );
+        return view( 'admin.categories.show', compact( 'category' ) );
+    }
+    public function edit( $id ) {
+        return view( 'admin.categories.create', [
+            'category'   => Taxonomy::find( $id ),
+            'categories' => Taxonomy::with( 'children' )->where( 'parent_id', '0' )->get(),
+            'delimiter'  => '',
+        ] );
+    }
+    public function update( Request $request, $id ) {
+//		request()->validate( [
+//			'title' => 'required',
+//			'slug'  => 'required|unique:categories,slug',
+//		] );
+        Taxonomy::find( $id )->update( $request->all() );
+        return redirect()->route( 'admin.categories.index' )
+            ->with( 'success', 'Категория успешно обновлена!' );
+    }
+    public function destroy( $id ) {
+        Taxonomy::find( $id )->delete();
+        return redirect()->route( 'admin.categories.index' )
+            ->with( 'success', 'Категория успешно удалена!' );
+    }
+
 }

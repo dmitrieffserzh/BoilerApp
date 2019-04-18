@@ -28,8 +28,8 @@
                         <thead>
                         <tr>
                             <th scope="col" style="width: 30px; text-align: center"></th>
-                            <th scope="col">Название</th>
-                            <th scope="col">Ссылка</th>
+                            <th scope="col">Наименование</th>
+                            <th scope="col">URL</th>
                             <th scope="col" style="width: 100px; text-align: right"></th>
                         </tr>
                         </thead>

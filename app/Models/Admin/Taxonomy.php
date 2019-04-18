@@ -8,6 +8,20 @@ class Taxonomy extends Model {
 
     protected $table = 'taxonomies';
 
+    public $fillable = [
+        'parent_id',
+        'title',
+        'slug',
+    ];
+
+    public $timestamps = false;
+
+
+    public function getRouteKeyName() {
+        return 'slug';
+    }
+
+
 
     // LOCAL RELATIONS
     public function parent () {
