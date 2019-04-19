@@ -3,12 +3,12 @@
         <td class="text-center">
             <span class=""
                   style="
-                        background: #4973ef;
-                        display: inline-block;
-                        width: 10px;
-                        height: 10px;
-                        border-radius: 25%;
-                    "></span>
+                          background: {{ $taxonomy->color }};
+                          display: inline-block;
+                          width: 10px;
+                          height: 10px;
+                          border-radius: 25%;
+                          "></span>
         </td>
         <td>
             {!! $delimiter ?? "" !!}<a href="{{ route($content_type.'.category.edit', $taxonomy->id) }}"
@@ -19,11 +19,13 @@
         </td>
         <td class="text-muted">
             <div class="btn-group float-right" role="group">
-                <a class="btn btn-primary btn-sm" href="{{ route($content_type.'.category.edit', $taxonomy->id) }}" style="line-height: 1.1;">
+                <a class="btn btn-primary btn-sm" href="{{ route($content_type.'.category.edit', $taxonomy->id) }}"
+                   style="line-height: 1.1;">
                     &#9998;
                 </a>
                 <a href="{{ route( $content_type.'.category.delete', $taxonomy->id) }}" data-method="delete"
-                data-token="{{csrf_token()}}" data-confirm="Вы уверены?" class="btn btn-danger btn-sm" style="line-height: 1.1;">
+                   data-token="{{csrf_token()}}" data-confirm="Вы уверены?" class="btn btn-danger btn-sm"
+                   style="line-height: 1.1;">
                     &#10006;
                 </a>
             </div>
@@ -34,6 +36,5 @@
           'taxonomies' => $taxonomy->children()->where('content_type', $content_type)->get(),
           'delimiter'  => '—' . $delimiter . ' '
         ])
-
     @endif
 @endforeach

@@ -4,6 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3 shadow-sm p-3 mb-5 bg-dark rounded-left " style="min-height: 700px">
+                @include('Admin.sidebar')
             </div>
             <div class="col shadow-sm p-3 mb-5 bg-white rounded-right">
                 @if (session('status'))
@@ -26,7 +27,7 @@
                 @include('admin.taxonomies.partials.form')
 
                 <hr>
-                <button type="submit" class="btn btn-primary">Сохранить</button>
+                <button type="submit" class="btn btn-primary float-right">Сохранить</button>
 
             </form>
             </div>

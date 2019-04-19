@@ -43,6 +43,7 @@ class TaxonomyController extends Controller {
         $taxonomy = new Taxonomy();
         $taxonomy->title        = $request->title;
         $taxonomy->slug         = $request->slug;
+        $taxonomy->color        = $request->color;
         $taxonomy->parent_id    = $request->parent_id;
         $taxonomy->content_type = $this->content_type;
         $taxonomy->save();

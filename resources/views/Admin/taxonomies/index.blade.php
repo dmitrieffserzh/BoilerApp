@@ -22,12 +22,15 @@
                 </div>
 
                 @if (session('status'))
-                    <div class="alert alert-success" role="alert">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{ session('status') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                 @endif
 
-                @if(!empty($taxonomies))
+                @if(count($taxonomies))
                     <table class="table table-sm table-hover">
                         <thead>
                         <tr>
@@ -41,15 +44,6 @@
 
                         @include('admin.taxonomies.partials.item_list', ['taxonomies' => $taxonomies, 'content_type' => $content_type])
 
-                        {{----}}
-                        {{--@foreach($taxonomies as $taxonomy)--}}
-                            {{--<tr>--}}
-                                {{--<th scope="row" style="width: 30px; text-align: center">{{ $taxonomy->id }}</th>--}}
-                                {{--<td><a href="" class="">{{ $taxonomy->title }}</a></td>--}}
-                                {{--<td class="text-muted">{{ $taxonomy->slug }}</td>--}}
-                                {{--<td style="width: 100px; text-align: right">действия</td>--}}
-                            {{--</tr>--}}
-                        {{--@endforeach--}}
                         </tbody>
                     </table>
                 @else

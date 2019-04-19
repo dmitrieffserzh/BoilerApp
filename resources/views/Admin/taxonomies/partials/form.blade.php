@@ -20,8 +20,8 @@
     </select>
 </div>
 
-{{--<div class="form-group">--}}
-    {{--<label for="parent_id">Цвет бейджа</label>--}}
-    {{--<input type="text" name="color" class="form-control" id="title" aria-describedby="titleHelp"--}}
-           {{--value="{{ $taxonomy->color ?? "#007bff" }}">--}}
-{{--</div>--}}
+<div class="form-group">
+    <label for="parent_id">Цвет</label>
+    <input type="text" name="color" class="form-control" id="title" aria-describedby="titleHelp"
+           value="{{ $taxonomy->color ?? "#007bff" }}">
+</div>
