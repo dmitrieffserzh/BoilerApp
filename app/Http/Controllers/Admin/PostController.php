@@ -9,7 +9,17 @@ use App\Http\Controllers\Controller;
 
 class PostController extends Controller {
 
-    public function index () {
+    public function index (Request $request) {
+    $this->getSegmentUrl($request);
+
+    $gfg = Post::with('taxonomy')->where('content_type', $this->content_type)->get();
+    $taxonomies = Taxonomy::where('content_type', $this->content_type)->get();
+
+     $posts = $taxonomies->with('posts')->get();
+        dd($gfg);
+
+
+
 
 
         return view('Admin.content.index');
@@ -37,4 +47,7 @@ class PostController extends Controller {
 
     }
 
+    public function getSegmentUrl(Request $request) {
+        return $this->content_type = $request->segment(2);
+    }
 }

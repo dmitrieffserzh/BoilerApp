@@ -27,17 +27,6 @@ class Taxonomy extends Model {
 
 
 
-    // LOCAL RELATIONS
-//    public function parent () {
-//        return $this->hasOne( self::class, 'id', 'parent_id');
-//    }
-//
-//    public function children () {
-//        return $this->hasMany(self::class, 'parent_id', 'id');
-//    }
-//
-
-
     // RELATIONS
     public function news () {
         return $this->hasMany(News::class, 'taxonomy_id');
