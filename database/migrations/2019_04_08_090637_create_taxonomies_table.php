@@ -26,9 +26,6 @@ class CreateTaxonomiesTable extends Migration
     }
 
 
-
-
-
     /**
      * Reverse the migrations.
      *
