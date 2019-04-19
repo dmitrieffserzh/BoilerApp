@@ -14,12 +14,13 @@ class CreateTaxonomiesTable extends Migration
     public function up()
     {
         Schema::create('taxonomies', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->BigIncrements('id');
             $table->unsignedInteger('parent_id')->nullable();
             $table->unsignedInteger('_lft');
             $table->unsignedInteger('_rgt');
             $table->string('title');
-            $table->string('slug');
+            $table->string('slug')->unique();
+            $table->string('color')->default('#007bff');
             $table->string('content_type');
         });
     }
