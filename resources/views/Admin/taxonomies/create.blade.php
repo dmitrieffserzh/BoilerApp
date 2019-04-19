@@ -19,7 +19,7 @@
                     </div>
                 </div>
 
-                    <form action="{{ route('posts.category.store') }}" method="POST">
+                    <form action="{{ route($content_type.'.category.store') }}" method="POST">
                         @csrf
                         @include('admin.taxonomies.partials.form')
                         <hr>

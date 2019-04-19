@@ -28,11 +28,22 @@ Route::group([
     'namespace'  => 'Admin',
     'prefix'     => 'admin'], function() {
     Route::get(  '/',                                 [ 'as' => 'index',                         'uses' => 'MainController@index'             ]);
+
+    // POSTS
     Route::get(  '/posts',                            [ 'as' => 'posts.index',                   'uses' => 'PostController@index'             ]);
     Route::get(  '/posts/categories',                 [ 'as' => 'posts.category',                'uses' => 'TaxonomyController@taxonomies'        ]);
     Route::get(  '/posts/categories/create',          [ 'as' => 'posts.category.create',         'uses' => 'TaxonomyController@taxonomiesCreate'  ]);
-    Route::post( '/posts/categories/store',          [ 'as' => 'posts.category.store',          'uses' => 'TaxonomyController@taxonomiesStore'   ]);
+    Route::post( '/posts/categories/store',           [ 'as' => 'posts.category.store',          'uses' => 'TaxonomyController@taxonomiesStore'   ]);
     Route::get(  '/posts/categories/{id}/edit',       [ 'as' => 'posts.category.edit',           'uses' => 'TaxonomyController@taxonomiesEdit'    ]);
-    Route::patch('/posts/categories/{id}/update',   [ 'as' => 'posts.category.update',         'uses' => 'TaxonomyController@taxonomiesUpdate'  ]);
+    Route::patch('/posts/categories/{id}/update',     [ 'as' => 'posts.category.update',         'uses' => 'TaxonomyController@taxonomiesUpdate'  ]);
     Route::get(  '/posts/categories/{id}/delete',     [ 'as' => 'posts.category.delete',         'uses' => 'TaxonomyController@taxonomiesDelete'  ]);
+
+    // NEWS
+    Route::get(  '/news',                            [ 'as' => 'news.index',                   'uses' => 'NewsController@index'             ]);
+    Route::get(  '/news/categories',                 [ 'as' => 'news.category',                'uses' => 'TaxonomyController@taxonomies'        ]);
+    Route::get(  '/news/categories/create',          [ 'as' => 'news.category.create',         'uses' => 'TaxonomyController@taxonomiesCreate'  ]);
+    Route::post( '/news/categories/store',           [ 'as' => 'news.category.store',          'uses' => 'TaxonomyController@taxonomiesStore'   ]);
+    Route::get(  '/news/categories/{id}/edit',       [ 'as' => 'news.category.edit',           'uses' => 'TaxonomyController@taxonomiesEdit'    ]);
+    Route::patch('/news/categories/{id}/update',     [ 'as' => 'news.category.update',         'uses' => 'TaxonomyController@taxonomiesUpdate'  ]);
+    Route::get(  '/news/categories/{id}/delete',     [ 'as' => 'news.category.delete',         'uses' => 'TaxonomyController@taxonomiesDelete'  ]);
 });

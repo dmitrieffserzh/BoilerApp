@@ -4,13 +4,14 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3 shadow-sm p-3 mb-5 bg-dark rounded-left " style="min-height: 700px">
+                @include('Admin.sidebar')
             </div>
             <div class="col shadow-sm p-3 mb-5 bg-white rounded-right">
 
 
                 <h4 class="my-3">Категории постов
 
-                    <a class="btn btn-primary btn-sm float-right" href="{{ route('posts.category.create') }}">
+                    <a class="btn btn-primary btn-sm float-right" href="{{ route( $content_type.'.category.create') }}">
                         &#10010; Создать категорию
                     </a>
                 </h4>

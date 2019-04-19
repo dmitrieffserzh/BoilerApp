@@ -19,7 +19,7 @@
                     </div>
                 </div>
 
-                <form action="{{ route('posts.category.update', $taxonomy->id) }}" method="post">
+                <form action="{{ route($content_type.'.category.update', $taxonomy->id) }}" method="post">
                 @csrf
                 {{ method_field('PATCH') }}
 

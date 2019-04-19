@@ -11,7 +11,7 @@
                     "></span>
         </td>
         <td>
-            {!! $delimiter ?? "" !!}<a href="{{ route('posts.category.edit', $taxonomy->id) }}"
+            {!! $delimiter ?? "" !!}<a href="{{ route($content_type.'.category.edit', $taxonomy->id) }}"
                                        class="text-dark">{{$taxonomy->title}}</a>
         </td>
         <td class="text-muted">
@@ -19,10 +19,10 @@
         </td>
         <td class="text-muted">
             <div class="btn-group float-right" role="group">
-                <a class="btn btn-primary btn-sm" href="{{ route('posts.category.edit', $taxonomy->id) }}" style="line-height: 1.1;">
+                <a class="btn btn-primary btn-sm" href="{{ route($content_type.'.category.edit', $taxonomy->id) }}" style="line-height: 1.1;">
                     &#9998;
                 </a>
-                <a href="{{ route( 'posts.category.delete', $taxonomy->id) }}" data-method="delete"
+                <a href="{{ route( $content_type.'.category.delete', $taxonomy->id) }}" data-method="delete"
                 data-token="{{csrf_token()}}" data-confirm="Вы уверены?" class="btn btn-danger btn-sm" style="line-height: 1.1;">
                     &#10006;
                 </a>

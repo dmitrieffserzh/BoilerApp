@@ -12,10 +12,11 @@ class TaxonomyController extends Controller {
         // $this->middleware('auth');
     }
 
+    public $content_type;
 
-    public $content_type = $this->getSegmentUrl();
+    public function taxonomies (Request $request) {
+        $this->getSegmentUrl($request);
 
-    public function taxonomies () {
         $taxonomies = Taxonomy::where('content_type', $this->content_type)->get()->toTree();
         return view('Admin.taxonomies.index',
             [   'taxonomies'    => $taxonomies,
@@ -26,7 +27,8 @@ class TaxonomyController extends Controller {
     }
 
 
-    public function taxonomiesCreate() {
+    public function taxonomiesCreate (Request $request) {
+        $this->getSegmentUrl($request);
         return view( 'Admin.taxonomies.create', [
             'taxonomy'   => null,
             'taxonomies' => Taxonomy::where('content_type', $this->content_type)->get()->toTree(),
@@ -37,21 +39,21 @@ class TaxonomyController extends Controller {
 
 
     public function taxonomiesStore( Request $request ) {
+        $this->getSegmentUrl($request);
         $taxonomy = new Taxonomy();
         $taxonomy->title        = $request->title;
         $taxonomy->slug         = $request->slug;
         $taxonomy->parent_id    = $request->parent_id;
-        $taxonomy->_lft         = 0;
-        $taxonomy->_rgt         = 0;
         $taxonomy->content_type = $this->content_type;
         $taxonomy->save();
 
-        return redirect()->route( 'posts.category' )
+        return redirect()->route( $this->content_type.'.category' )
             ->with( 'status', 'Категория успешно сохранена!' );
     }
 
 
-    public function taxonomiesEdit( $id ) {
+    public function taxonomiesEdit( Request $request, $id ) {
+        $this->getSegmentUrl($request);
         return view( 'Admin.taxonomies.edit', [
             'taxonomy'   => Taxonomy::find( $id ),
             'taxonomies' => Taxonomy::where('content_type', $this->content_type)->get()->toTree(),
@@ -62,21 +64,23 @@ class TaxonomyController extends Controller {
 
 
     public function taxonomiesUpdate( Request $request, $id ) {
+        $this->getSegmentUrl($request);
         Taxonomy::find( $id )->update( $request->all() );
-        return redirect()->route( 'posts.category' )
+        return redirect()->route( $this->content_type.'.category' )
             ->with( 'status', 'Категория успешно обновлена!' );
     }
 
 
-    public function taxonomiesDelete( $id ) {
+    public function taxonomiesDelete( Request $request, $id ) {
+        $this->getSegmentUrl($request);
         Taxonomy::find( $id )->delete();
-        return redirect()->route( 'posts.category' )
+        return redirect()->route( $this->content_type.'.category' )
             ->with( 'status', 'Категория успешно удалена!' );
     }
 
 
 
-    public function getSegmentUrl() {
-        return $url->segment(1);
+    public function getSegmentUrl(Request $request) {
+         return $this->content_type = $request->segment(2);
     }
 }
