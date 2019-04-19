@@ -9,14 +9,15 @@ use App\Http\Controllers\Controller;
 
 class PostController extends Controller {
 
+
+    public $content_type;
+
     public function index (Request $request) {
     $this->getSegmentUrl($request);
 
-    $gfg = Post::with('taxonomy')->where('content_type', $this->content_type)->get();
-    $taxonomies = Taxonomy::where('content_type', $this->content_type)->get();
+        $taxonomies = Post::whereIn('taxonomy_id', [2])->get();
 
-     $posts = $taxonomies->with('posts')->get();
-        dd($gfg);
+        dd($taxonomies);
 
 
 
