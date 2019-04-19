@@ -2,9 +2,13 @@
 
 namespace App\Models\Admin;
 
+use Kalnoy\Nestedset\NodeTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Taxonomy extends Model {
+
+    use NodeTrait;
+
 
     protected $table = 'taxonomies';
 
@@ -24,14 +28,14 @@ class Taxonomy extends Model {
 
 
     // LOCAL RELATIONS
-    public function parent () {
-        return $this->hasOne( self::class, 'id', 'parent_id');
-    }
-
-    public function children () {
-        return $this->hasMany(self::class, 'parent_id', 'id');
-    }
-
+//    public function parent () {
+//        return $this->hasOne( self::class, 'id', 'parent_id');
+//    }
+//
+//    public function children () {
+//        return $this->hasMany(self::class, 'parent_id', 'id');
+//    }
+//
 
 
     // RELATIONS

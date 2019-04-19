@@ -11,20 +11,12 @@
            value="{{ $taxonomy->slug ?? "" }}">
 </div>
 
-@php
-    if(isset($taxonomy)) {
-        $taxonomy_id = $taxonomy->id;
-    } else {
-        $taxonomy_id = null;
-    }
-@endphp
-
 <div class="form-group">
     <label for="parent_id">Родительская категория</label>
 
     <select id="parent_id" class="form-control" name="parent_id">
         <option value="0">-- без родительской --</option>
-         @include('admin.taxonomies.partials.form_item_list', ['taxonomies' => $taxonomies, 'taxonomy_id' => $taxonomy_id])
+         @include('admin.taxonomies.partials.form_item_list', ['taxonomies' => $taxonomies, 'parent' => $taxonomy['parent_id'] ])
     </select>
 </div>
 

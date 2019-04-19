@@ -6,16 +6,12 @@
             <div class="col-md-3 shadow-sm p-3 mb-5 bg-dark rounded-left " style="min-height: 700px">
             </div>
             <div class="col shadow-sm p-3 mb-5 bg-white rounded-right">
-                @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
-                    </div>
-                @endif
+
 
                 <h4 class="my-3">Категории постов
 
                     <a class="btn btn-primary btn-sm float-right" href="{{ route('posts.category.create') }}">
-                        Создать категорию
+                        &#10010; Создать категорию
                     </a>
                 </h4>
                 <div class="row">
@@ -23,6 +19,13 @@
                            Панель управления / Посты / Категории
                     </div>
                 </div>
+
+                @if (session('status'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
+                @endif
+
                 @if(!empty($taxonomies))
                     <table class="table table-sm table-hover">
                         <thead>

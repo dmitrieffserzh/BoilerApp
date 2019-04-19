@@ -1,9 +1,9 @@
 @foreach ($taxonomies as $taxonomy)
 
     <option value="{{$taxonomy->id ?? ""}}"
-            @isset($taxonomy_id)
+            @isset($parent)
 
-                @if ($taxonomy_id == $taxonomy->id)
+                @if ($parent == $taxonomy->id)
                 selected="true"
                 @endif
 
@@ -16,9 +16,9 @@
     @if (count($taxonomy->children) > 0)
 
         @include('admin.taxonomies.partials.form_item_list', [
-          'taxonomies' => $taxonomy->children()->where('content_type', $content_type)->get(),
-          'delimiter'  => '—' . $delimiter . ' ',
-          'taxonomy_id' => $taxonomy_id
+          'taxonomies'  => $taxonomy->children()->where('content_type', $content_type)->get(),
+          'delimiter'   => '&mdash;' . $delimiter . ' ',
+          'parent'      => $parent
         ])
 
     @endif
