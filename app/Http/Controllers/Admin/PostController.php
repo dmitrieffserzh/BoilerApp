@@ -9,44 +9,74 @@ use App\Http\Controllers\Controller;
 
 class PostController extends Controller {
 
-
     public $content_type;
 
-    public function index (Request $request) {
-    $this->getSegmentUrl($request);
+    public function index(Request $request) {
+        $this->getSegmentUrl($request);
 
-        $taxonomies = Post::whereIn('taxonomy_id', [2])->get();
+        $taxonomies = Taxonomy::where('content_type', $this->content_type)->pluck('id');
+        $posts = Post::whereIn('taxonomy_id', $taxonomies)->latest()->paginate(25);
+        if (!count($posts)) {
+            abort(404);
+        }
 
-        dd($taxonomies);
-
-
-
-
-
-        return view('Admin.content.index');
-
-        // GET TAXONOMIES
-       // $tax = Taxonomy::where('content_type', 'posts')->get();
-
-        //dd( $tax );
-
-
-
-
-        // GET POSTS
-       // $tax = Taxonomy::where('content_type', 'posts')->find(5);
-       // $posts = $tax->posts;
-       // dd( $posts );
-
-
-
-        // GET POST TAXONOMY
-      //  $post = Post::find(4);
-       // $tax = $post->taxonomy;
-
-       // dd( $tax );
-
+        return view('Admin.content.index',
+            ['posts' => $posts,
+                'content_type' => $this->content_type
+            ]);
     }
+
+
+    public function create (Request $request) {
+        $this->getSegmentUrl($request);
+        return view( 'Admin.content.create', [
+            'taxonomy'   => null,
+            'taxonomies' => Taxonomy::where('content_type', $this->content_type)->get()->toTree(),
+            'delimiter'  => '',
+            'content_type'  => $this->content_type
+        ] );
+    }
+
+
+    public function store( Request $request ) {
+        $this->getSegmentUrl($request);
+       //dd($request);
+        Post::create($request->all());
+
+        return redirect()->route( $this->content_type.'.index' )
+            ->with( 'status', 'Пост успешно сохранен!' );
+    }
+
+
+    public function edit( Request $request, $id ) {
+        $this->getSegmentUrl($request);
+
+        return view( 'Admin.content.edit', [
+            'post'   => $post = Post::find( $id ),
+            'taxonomy' => Taxonomy::find($post->taxonomy_id),
+            'taxonomies' => Taxonomy::where('content_type', $this->content_type)->get()->toTree(),
+            'delimiter'  => '',
+            'content_type'  => $this->content_type
+        ] );
+    }
+
+
+    public function update( Request $request, $id ) {
+        $this->getSegmentUrl($request);
+        Post::find( $id )->update( $request->all() );
+        return redirect()->route( $this->content_type.'.index' )
+            ->with( 'status', 'Пост успешно обновлен!' );
+    }
+
+
+    public function delete( Request $request, $id ) {
+        $this->getSegmentUrl($request);
+        Post::find( $id )->delete();
+        return redirect()->route( $this->content_type.'.index' )
+            ->with( 'status', 'Пост успешно удален!' );
+    }
+
+
 
     public function getSegmentUrl(Request $request) {
         return $this->content_type = $request->segment(2);

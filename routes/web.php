@@ -26,11 +26,16 @@ Route::get('/', 'MainController@index')->name('main');
 // ADMIN ============================================================================================================ //
 Route::group([
     'namespace'  => 'Admin',
-    'prefix'     => 'admin'], function() {
+    'prefix'     => 'admin2'], function() {
     Route::get(  '/',                                 [ 'as' => 'index',                         'uses' => 'MainController@index'             ]);
 
     // POSTS
     Route::get(  '/posts',                            [ 'as' => 'posts.index',                   'uses' => 'PostController@index'             ]);
+    Route::get(  '/posts/create',                     [ 'as' => 'posts.create',                  'uses' => 'PostController@create'            ]);
+    Route::post( '/posts/store',                      [ 'as' => 'posts.store',                   'uses' => 'PostController@store'             ]);
+    Route::get(  '/posts/{id}/edit',                  [ 'as' => 'posts.edit',                    'uses' => 'PostController@edit'              ]);
+    Route::patch('/posts/{id}/update',                [ 'as' => 'posts.update',                  'uses' => 'PostController@update'            ]);
+    Route::get(  '/posts/{id}/delete',                [ 'as' => 'posts.delete',                  'uses' => 'PostController@delete'             ]);
     Route::get(  '/posts/categories',                 [ 'as' => 'posts.category',                'uses' => 'TaxonomyController@taxonomies'        ]);
     Route::get(  '/posts/categories/create',          [ 'as' => 'posts.category.create',         'uses' => 'TaxonomyController@taxonomiesCreate'  ]);
     Route::post( '/posts/categories/store',           [ 'as' => 'posts.category.store',          'uses' => 'TaxonomyController@taxonomiesStore'   ]);

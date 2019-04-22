@@ -23,5 +23,5 @@
 <div class="form-group">
     <label for="parent_id">Цвет</label>
     <input type="text" name="color" class="form-control" id="title" aria-describedby="titleHelp"
-           value="{{ $taxonomy->color ?? "#007bff" }}">
+           value="{{ $taxonomy->color ?? "" }}">
 </div>
